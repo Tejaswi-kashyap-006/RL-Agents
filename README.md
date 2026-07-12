@@ -13,19 +13,6 @@ Why SQL: it is genuinely multi-turn (the agent must explore the schema before it
 query) and genuinely verifiable (execute the gold SQL, compare result sets). That
 combination is what makes RL viable here.
 
-## Status
-
-| Milestone | State |
-|---|---|
-| M1 — Scaffolding (structure, config, preflight gate) | done |
-| M2 — DB + tools | pending |
-| M3 — LangGraph environment (gpt-4o-mini baseline runs) | pending |
-| M4 — Tasks (150, verified gold SQL) | pending |
-| M5 — Rewards + anti-hacking tests | pending |
-| M6 — Train, smoke tier | pending |
-| M7 — Train, full tier | pending |
-| M8 — Evaluation → `docs/RESULTS.md` | pending |
-
 ## Hardware safety — read before training
 
 Target machine: laptop RTX 4060, 8 GB VRAM, 16 GB RAM.
