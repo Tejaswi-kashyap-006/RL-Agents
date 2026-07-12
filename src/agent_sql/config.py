@@ -33,6 +33,10 @@ MAX_GRAD_NORM = 0.1
 PER_DEVICE_TRAIN_BATCH_SIZE = 1
 GRADIENT_ACCUMULATION_STEPS = 4
 
+# --- Database ---
+DB_PATH = "outputs/ecommerce.db"  # gitignored; rebuild with scripts/build_db.py
+DB_SEED = 42  # deterministic seed — gold SQL results depend on it
+
 # --- Environment (LangGraph loop) ---
 MAX_TURNS = 6  # hard episode cap; also terminate on repeated identical tool calls
 QUERY_ROW_CAP = 100  # LIMIT injected into every run_query
