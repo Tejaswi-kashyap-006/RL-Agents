@@ -1,0 +1,902 @@
+[
+  {
+    "id": "t001",
+    "question": "What is the status of order ID 2?",
+    "gold_sql": "SELECT status FROM orders WHERE id = 2",
+    "split": "train"
+  },
+  {
+    "id": "t002",
+    "question": "How many unique products are in the Electronics category?",
+    "gold_sql": "SELECT COUNT(DISTINCT id) FROM products WHERE category_id = 1",
+    "split": "train"
+  },
+  {
+    "id": "t003",
+    "question": "What is the total revenue generated from orders with a status of 'delivered'?",
+    "gold_sql": "SELECT SUM(oi.quantity * oi.unit_price) FROM order_items oi JOIN orders o ON oi.order_id = o.id WHERE o.status = 'delivered'",
+    "split": "train"
+  },
+  {
+    "id": "t004",
+    "question": "What is the status of the order placed by customer ID 1?",
+    "gold_sql": "SELECT status FROM orders WHERE customer_id = 1",
+    "split": "train"
+  },
+  {
+    "id": "t005",
+    "question": "What is the total quantity of order items for order ID 3?",
+    "gold_sql": "SELECT SUM(quantity) AS total_quantity FROM order_items WHERE order_id = 3",
+    "split": "train"
+  },
+  {
+    "id": "t006",
+    "question": "Which product has the highest price in the Books category?",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 2 ORDER BY price DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t007",
+    "question": "What is the name of the product with the lowest price in the database?",
+    "gold_sql": "SELECT name FROM products WHERE price = (SELECT MIN(price) FROM products)",
+    "split": "train"
+  },
+  {
+    "id": "t008",
+    "question": "What is the average price of products in the Electronics category?",
+    "gold_sql": "SELECT AVG(price) FROM products WHERE category_id = (SELECT id FROM categories WHERE name = 'Electronics')",
+    "split": "train"
+  },
+  {
+    "id": "t009",
+    "question": "What is the total revenue generated from all orders placed by customer ID 2?",
+    "gold_sql": "SELECT SUM(quantity * unit_price) FROM order_items WHERE order_id IN (SELECT id FROM orders WHERE customer_id = 2)",
+    "split": "train"
+  },
+  {
+    "id": "t010",
+    "question": "How many orders have been placed after January 1, 2024?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE order_date > '2024-01-01'",
+    "split": "train"
+  },
+  {
+    "id": "t011",
+    "question": "What is the name of the product with ID 1?",
+    "gold_sql": "SELECT name FROM products WHERE id = 1",
+    "split": "train"
+  },
+  {
+    "id": "t012",
+    "question": "List the names of customers who live in Denver and have made at least one order.",
+    "gold_sql": "SELECT DISTINCT customers.name FROM customers JOIN orders ON customers.id = orders.customer_id WHERE customers.city = 'Denver'",
+    "split": "train"
+  },
+  {
+    "id": "t013",
+    "question": "What is the name of the customer from Frankfurt?",
+    "gold_sql": "SELECT name FROM customers WHERE city = 'Frankfurt'",
+    "split": "train"
+  },
+  {
+    "id": "t014",
+    "question": "How many products in the Clothing category have a price under 100?",
+    "gold_sql": "SELECT COUNT(*) FROM products WHERE category_id = 3 AND price < 100",
+    "split": "train"
+  },
+  {
+    "id": "t015",
+    "question": "What is the average price of products in the Clothing category?",
+    "gold_sql": "SELECT AVG(price) FROM products WHERE category_id = 3",
+    "split": "train"
+  },
+  {
+    "id": "t016",
+    "question": "What is the status of the most recent order placed?",
+    "gold_sql": "SELECT status FROM orders ORDER BY order_date DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t017",
+    "question": "How many orders have a status of 'delivered' in 2024?",
+    "gold_sql": "SELECT COUNT(*) AS total_delivered FROM orders WHERE status = 'delivered' AND order_date LIKE '2024%'",
+    "split": "train"
+  },
+  {
+    "id": "t018",
+    "question": "What is the total number of unique customers in the database?",
+    "gold_sql": "SELECT COUNT(DISTINCT id) FROM customers",
+    "split": "train"
+  },
+  {
+    "id": "t019",
+    "question": "What is the total number of unique categories in the database?",
+    "gold_sql": "SELECT COUNT(DISTINCT id) AS unique_categories FROM categories",
+    "split": "train"
+  },
+  {
+    "id": "t020",
+    "question": "How many different categories of products are there?",
+    "gold_sql": "SELECT COUNT(DISTINCT category_id) FROM products",
+    "split": "train"
+  },
+  {
+    "id": "t021",
+    "question": "How many orders were shipped in the year 2024?",
+    "gold_sql": "SELECT COUNT(*) AS total_shipped FROM orders WHERE status = 'shipped' AND order_date LIKE '2024%'",
+    "split": "train"
+  },
+  {
+    "id": "t022",
+    "question": "What is the average quantity of products ordered in all orders?",
+    "gold_sql": "SELECT AVG(quantity) AS average_quantity FROM order_items",
+    "split": "train"
+  },
+  {
+    "id": "t023",
+    "question": "Which customer has the most orders placed?",
+    "gold_sql": "SELECT customers.name FROM customers JOIN orders ON customers.id = orders.customer_id GROUP BY customers.id ORDER BY COUNT(orders.id) DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t024",
+    "question": "List the names of the top 3 products by price in the Clothing category.",
+    "gold_sql": "SELECT products.name FROM products JOIN categories ON products.category_id = categories.id WHERE categories.name = 'Clothing' ORDER BY products.price DESC LIMIT 3",
+    "split": "train"
+  },
+  {
+    "id": "t025",
+    "question": "List the names of the top 2 most recent customers who signed up in 2023.",
+    "gold_sql": "SELECT name FROM customers WHERE signup_date LIKE '2023%' ORDER BY signup_date DESC LIMIT 2",
+    "split": "train"
+  },
+  {
+    "id": "t026",
+    "question": "What is the total number of customers who signed up in the city of Frankfurt?",
+    "gold_sql": "SELECT COUNT(*) FROM customers WHERE city = 'Frankfurt'",
+    "split": "train"
+  },
+  {
+    "id": "t027",
+    "question": "Which customer has the earliest signup date?",
+    "gold_sql": "SELECT name FROM customers ORDER BY signup_date ASC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t028",
+    "question": "What is the category of the product with ID 2?",
+    "gold_sql": "SELECT name FROM categories WHERE id = (SELECT category_id FROM products WHERE id = 2)",
+    "split": "train"
+  },
+  {
+    "id": "t029",
+    "question": "Which category has the least number of products?",
+    "gold_sql": "SELECT categories.name FROM categories LEFT JOIN products ON categories.id = products.category_id GROUP BY categories.id ORDER BY COUNT(products.id) ASC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t030",
+    "question": "List the names of the customers who signed up in May 2023.",
+    "gold_sql": "SELECT name FROM customers WHERE signup_date BETWEEN '2023-05-01' AND '2023-05-31'",
+    "split": "train"
+  },
+  {
+    "id": "t031",
+    "question": "What is the average price of products in the Books category?",
+    "gold_sql": "SELECT AVG(price) FROM products WHERE category_id = 2",
+    "split": "train"
+  },
+  {
+    "id": "t032",
+    "question": "What is the price of the cheapest product in the database?",
+    "gold_sql": "SELECT MIN(price) FROM products",
+    "split": "train"
+  },
+  {
+    "id": "t033",
+    "question": "How many products are priced above 300 in the Electronics category?",
+    "gold_sql": "SELECT COUNT(*) FROM products WHERE category_id = (SELECT id FROM categories WHERE name = 'Electronics') AND price > 300",
+    "split": "train"
+  },
+  {
+    "id": "t034",
+    "question": "How many orders have a status of 'cancelled' and were placed in 2023?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE status = 'cancelled' AND order_date LIKE '2023-%'",
+    "split": "train"
+  },
+  {
+    "id": "t035",
+    "question": "Which customer placed the order with ID 2?",
+    "gold_sql": "SELECT customer_id FROM orders WHERE id = 2",
+    "split": "train"
+  },
+  {
+    "id": "t036",
+    "question": "What is the name of the customer who has placed the most recent order?",
+    "gold_sql": "SELECT c.name FROM customers c JOIN orders o ON c.id = o.customer_id ORDER BY o.order_date DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t037",
+    "question": "What are the names of the products in the Clothing category?",
+    "gold_sql": "SELECT products.name FROM products JOIN categories ON products.category_id = categories.id WHERE categories.name = 'Clothing'",
+    "split": "train"
+  },
+  {
+    "id": "t038",
+    "question": "What is the total number of products with a price greater than 100?",
+    "gold_sql": "SELECT COUNT(*) AS products_count FROM products WHERE price > 100",
+    "split": "train"
+  },
+  {
+    "id": "t039",
+    "question": "What is the total number of orders with a status of 'cancelled' in 2024?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE status = 'cancelled' AND order_date LIKE '2024-%'",
+    "split": "train"
+  },
+  {
+    "id": "t040",
+    "question": "What is the total revenue generated from all products in the Electronics category?",
+    "gold_sql": "SELECT SUM(price) FROM products WHERE category_id = 1",
+    "split": "train"
+  },
+  {
+    "id": "t041",
+    "question": "What is the name of the product with the highest price in the Electronics category?",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 1 ORDER BY price DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t042",
+    "question": "List the names of the top 2 most expensive products in the database.",
+    "gold_sql": "SELECT name FROM products ORDER BY price DESC LIMIT 2",
+    "split": "train"
+  },
+  {
+    "id": "t043",
+    "question": "What is the quantity of the product with ID 3 that was ordered?",
+    "gold_sql": "SELECT quantity FROM order_items WHERE product_id = 3",
+    "split": "train"
+  },
+  {
+    "id": "t044",
+    "question": "What is the total sales amount for the product 'Wireless Mouse'?",
+    "gold_sql": "SELECT SUM(quantity * unit_price) FROM order_items WHERE product_id = (SELECT id FROM products WHERE name = 'Wireless Mouse')",
+    "split": "train"
+  },
+  {
+    "id": "t045",
+    "question": "How many unique customers signed up in the year 2023?",
+    "gold_sql": "SELECT COUNT(DISTINCT id) FROM customers WHERE signup_date LIKE '2023-%'",
+    "split": "train"
+  },
+  {
+    "id": "t046",
+    "question": "What is the name of the product in the Electronics category with the lowest price?",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 1 ORDER BY price LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t047",
+    "question": "What is the total number of orders with a status of 'delivered' in the year 2025?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE status = 'delivered' AND order_date BETWEEN '2025-01-01' AND '2025-12-31'",
+    "split": "train"
+  },
+  {
+    "id": "t048",
+    "question": "Which product has the lowest price in the Electronics category?",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 1 ORDER BY price ASC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t049",
+    "question": "What is the signup date of the customer with the ID 3?",
+    "gold_sql": "SELECT signup_date FROM customers WHERE id = 3",
+    "split": "train"
+  },
+  {
+    "id": "t050",
+    "question": "How many different products are in the Clothing category?",
+    "gold_sql": "SELECT COUNT(*) FROM products WHERE category_id = 3",
+    "split": "train"
+  },
+  {
+    "id": "t051",
+    "question": "What is the price of the most expensive product in the database?",
+    "gold_sql": "SELECT MAX(price) AS most_expensive FROM products",
+    "split": "train"
+  },
+  {
+    "id": "t052",
+    "question": "What are the names of the products priced below 150 in the Electronics category?",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 1 AND price < 150",
+    "split": "train"
+  },
+  {
+    "id": "t053",
+    "question": "List the names of the top 2 customers with the most recent signup dates.",
+    "gold_sql": "SELECT name FROM customers ORDER BY signup_date DESC LIMIT 2",
+    "split": "train"
+  },
+  {
+    "id": "t054",
+    "question": "List the names of the products in the Books category.",
+    "gold_sql": "SELECT name FROM products WHERE category_id = (SELECT id FROM categories WHERE name = 'Books')",
+    "split": "train"
+  },
+  {
+    "id": "t055",
+    "question": "How many unique products were ordered by customers in the category 'Books'?",
+    "gold_sql": "SELECT COUNT(DISTINCT oi.product_id) FROM order_items oi JOIN products p ON oi.product_id = p.id WHERE p.category_id = 2",
+    "split": "train"
+  },
+  {
+    "id": "t056",
+    "question": "What is the total revenue generated from order ID 1?",
+    "gold_sql": "SELECT SUM(quantity * unit_price) FROM order_items WHERE order_id = 1",
+    "split": "train"
+  },
+  {
+    "id": "t057",
+    "question": "Which category has the highest average product price?",
+    "gold_sql": "SELECT c.name FROM categories c JOIN products p ON c.id = p.category_id GROUP BY c.id ORDER BY AVG(p.price) DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t058",
+    "question": "List the names of the top 2 products by price in the Electronics category.",
+    "gold_sql": "SELECT name FROM products WHERE category_id = (SELECT id FROM categories WHERE name = 'Electronics') ORDER BY price DESC LIMIT 2",
+    "split": "train"
+  },
+  {
+    "id": "t059",
+    "question": "How many products are priced above 150 in the category named 'Electronics'?",
+    "gold_sql": "SELECT COUNT(*) FROM products WHERE category_id = 1 AND price > 150",
+    "split": "train"
+  },
+  {
+    "id": "t060",
+    "question": "What is the price of the most expensive product in the Clothing category?",
+    "gold_sql": "SELECT price FROM products WHERE category_id = (SELECT id FROM categories WHERE name = 'Clothing') ORDER BY price DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t061",
+    "question": "How many customers signed up in the year 2023?",
+    "gold_sql": "SELECT COUNT(*) FROM customers WHERE signup_date LIKE '2023%'",
+    "split": "train"
+  },
+  {
+    "id": "t062",
+    "question": "How many different products were ordered by the customer with ID 1?",
+    "gold_sql": "SELECT COUNT(DISTINCT product_id) FROM order_items WHERE order_id IN (SELECT id FROM orders WHERE customer_id = 1)",
+    "split": "train"
+  },
+  {
+    "id": "t063",
+    "question": "What is the signup date of the customer named Jamal Costa?",
+    "gold_sql": "SELECT signup_date FROM customers WHERE name = 'Jamal Costa'",
+    "split": "train"
+  },
+  {
+    "id": "t064",
+    "question": "What is the total revenue generated from all order items in order ID 3?",
+    "gold_sql": "SELECT SUM(quantity * unit_price) FROM order_items WHERE order_id = 3",
+    "split": "train"
+  },
+  {
+    "id": "t065",
+    "question": "List the names of all customers who signed up in April 2023.",
+    "gold_sql": "SELECT name FROM customers WHERE signup_date BETWEEN '2023-04-01' AND '2023-04-30'",
+    "split": "train"
+  },
+  {
+    "id": "t066",
+    "question": "What are the names of the products in the Clothing category priced above 50?",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 3 AND price > 50",
+    "split": "train"
+  },
+  {
+    "id": "t067",
+    "question": "How many customers signed up in 2023?",
+    "gold_sql": "SELECT COUNT(*) AS customer_count FROM customers WHERE signup_date >= '2023-01-01' AND signup_date < '2024-01-01'",
+    "split": "train"
+  },
+  {
+    "id": "t068",
+    "question": "How many customers are there in the city of Frankfurt who signed up in 2023?",
+    "gold_sql": "SELECT COUNT(*) AS customer_count FROM customers WHERE city = 'Frankfurt' AND signup_date >= '2023-01-01' AND signup_date < '2024-01-01'",
+    "split": "train"
+  },
+  {
+    "id": "t069",
+    "question": "How many orders were placed in the year 2024?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE order_date LIKE '2024-%'",
+    "split": "train"
+  },
+  {
+    "id": "t070",
+    "question": "Which category has the highest number of products?",
+    "gold_sql": "SELECT categories.name FROM categories JOIN products ON categories.id = products.category_id GROUP BY categories.id ORDER BY COUNT(products.id) DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t071",
+    "question": "What is the signup date of the customer named Mei Ivanov?",
+    "gold_sql": "SELECT signup_date FROM customers WHERE name = 'Mei Ivanov'",
+    "split": "train"
+  },
+  {
+    "id": "t072",
+    "question": "What is the name of the product with ID 2?",
+    "gold_sql": "SELECT name FROM products WHERE id = 2",
+    "split": "train"
+  },
+  {
+    "id": "t073",
+    "question": "How many products are there in the Books category?",
+    "gold_sql": "SELECT COUNT(*) FROM products WHERE category_id = (SELECT id FROM categories WHERE name = 'Books')",
+    "split": "train"
+  },
+  {
+    "id": "t074",
+    "question": "How many different products are there in the Electronics category?",
+    "gold_sql": "SELECT COUNT(*) FROM products WHERE category_id = 1",
+    "split": "train"
+  },
+  {
+    "id": "t075",
+    "question": "List the names of customers who signed up in December 2023.",
+    "gold_sql": "SELECT name FROM customers WHERE signup_date LIKE '2023-12-%'",
+    "split": "train"
+  },
+  {
+    "id": "t076",
+    "question": "What is the quantity of the product with ID 2 that was ordered?",
+    "gold_sql": "SELECT SUM(quantity) FROM order_items WHERE product_id = 2",
+    "split": "train"
+  },
+  {
+    "id": "t077",
+    "question": "How many products are in the Electronics category with a price greater than 100?",
+    "gold_sql": "SELECT COUNT(*) FROM products WHERE category_id = 1 AND price > 100",
+    "split": "train"
+  },
+  {
+    "id": "t078",
+    "question": "What is the total quantity of order items for all orders placed in 2024?",
+    "gold_sql": "SELECT SUM(quantity) FROM order_items WHERE order_id IN (SELECT id FROM orders WHERE order_date BETWEEN '2024-01-01' AND '2024-12-31')",
+    "split": "train"
+  },
+  {
+    "id": "t079",
+    "question": "What is the status of the order with ID 1?",
+    "gold_sql": "SELECT status FROM orders WHERE id = 1",
+    "split": "train"
+  },
+  {
+    "id": "t080",
+    "question": "How many unique customers have placed orders in the year 2024?",
+    "gold_sql": "SELECT COUNT(DISTINCT customer_id) FROM orders WHERE order_date BETWEEN '2024-01-01' AND '2024-12-31'",
+    "split": "train"
+  },
+  {
+    "id": "t081",
+    "question": "What is the total quantity of order items for orders placed in the year 2024?",
+    "gold_sql": "SELECT SUM(quantity) FROM order_items WHERE order_id IN (SELECT id FROM orders WHERE order_date LIKE '2024-%')",
+    "split": "train"
+  },
+  {
+    "id": "t082",
+    "question": "Which customer has the email 'chen.bhat.1@example.com'?",
+    "gold_sql": "SELECT name FROM customers WHERE email = 'chen.bhat.1@example.com'",
+    "split": "train"
+  },
+  {
+    "id": "t083",
+    "question": "What is the total quantity of order items for all orders placed by customer ID 2?",
+    "gold_sql": "SELECT SUM(quantity) FROM order_items JOIN orders ON order_items.order_id = orders.id WHERE orders.customer_id = 2",
+    "split": "train"
+  },
+  {
+    "id": "t084",
+    "question": "What is the total quantity of items ordered from the product named 'USB-C Hub'?",
+    "gold_sql": "SELECT SUM(quantity) FROM order_items WHERE product_id = (SELECT id FROM products WHERE name = 'USB-C Hub')",
+    "split": "train"
+  },
+  {
+    "id": "t085",
+    "question": "How many orders have a status of 'delivered' and were placed in 2025?",
+    "gold_sql": "SELECT COUNT(*) AS delivered_orders FROM orders WHERE status = 'delivered' AND order_date LIKE '2025%'",
+    "split": "train"
+  },
+  {
+    "id": "t086",
+    "question": "How many customers live in Denver?",
+    "gold_sql": "SELECT COUNT(*) FROM customers WHERE city = 'Denver'",
+    "split": "train"
+  },
+  {
+    "id": "t087",
+    "question": "What is the total revenue from orders placed by customers in Denver?",
+    "gold_sql": "SELECT SUM(order_items.unit_price * order_items.quantity) AS total_revenue FROM orders JOIN customers ON orders.customer_id = customers.id JOIN order_items ON orders.id = order_items.order_id WHERE customers.city = 'Denver'",
+    "split": "train"
+  },
+  {
+    "id": "t088",
+    "question": "Which order has the most order items?",
+    "gold_sql": "SELECT order_id FROM order_items GROUP BY order_id ORDER BY COUNT(*) DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t089",
+    "question": "What is the total price of products in the Clothing category?",
+    "gold_sql": "SELECT SUM(price) AS total_price FROM products WHERE category_id = 3",
+    "split": "train"
+  },
+  {
+    "id": "t090",
+    "question": "What is the name of the cheapest product in the Clothing category?",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 3 ORDER BY price ASC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t091",
+    "question": "What is the total number of customers who signed up in December 2023?",
+    "gold_sql": "SELECT COUNT(*) FROM customers WHERE signup_date LIKE '2023-12-%'",
+    "split": "train"
+  },
+  {
+    "id": "t092",
+    "question": "List the names of customers who live in Bangalore.",
+    "gold_sql": "SELECT name FROM customers WHERE city = 'Bangalore'",
+    "split": "train"
+  },
+  {
+    "id": "t093",
+    "question": "What is the name of the customer with the highest ID?",
+    "gold_sql": "SELECT name FROM customers ORDER BY id DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t094",
+    "question": "What is the total revenue generated from orders placed by customers in Bangalore?",
+    "gold_sql": "SELECT SUM(order_items.quantity * order_items.unit_price) AS total_revenue FROM orders JOIN customers ON orders.customer_id = customers.id JOIN order_items ON orders.id = order_items.order_id WHERE customers.city = 'Bangalore'",
+    "split": "train"
+  },
+  {
+    "id": "t095",
+    "question": "How many unique customers are there who live in Frankfurt?",
+    "gold_sql": "SELECT COUNT(DISTINCT id) FROM customers WHERE city = 'Frankfurt'",
+    "split": "train"
+  },
+  {
+    "id": "t096",
+    "question": "What is the city of the customer who placed the most recent order?",
+    "gold_sql": "SELECT customers.city FROM customers JOIN orders ON customers.id = orders.customer_id ORDER BY orders.order_date DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t097",
+    "question": "How many orders were placed on '2024-01-16'?",
+    "gold_sql": "SELECT COUNT(*) AS order_count FROM orders WHERE order_date = '2024-01-16'",
+    "split": "train"
+  },
+  {
+    "id": "t098",
+    "question": "What is the city of the customer who has the highest ID?",
+    "gold_sql": "SELECT city FROM customers ORDER BY id DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t099",
+    "question": "What is the total revenue generated from orders placed by customers residing in Frankfurt?",
+    "gold_sql": "SELECT SUM(quantity * unit_price) FROM order_items JOIN orders ON order_items.order_id = orders.id JOIN customers ON orders.customer_id = customers.id WHERE customers.city = 'Frankfurt'",
+    "split": "train"
+  },
+  {
+    "id": "t100",
+    "question": "Which city has the most customers signed up?",
+    "gold_sql": "SELECT city FROM customers GROUP BY city ORDER BY COUNT(*) DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t101",
+    "question": "How many orders were made in the year 2023?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE order_date LIKE '2023-%'",
+    "split": "train"
+  },
+  {
+    "id": "t102",
+    "question": "How many orders are currently in 'pending' status?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE status = 'pending'",
+    "split": "train"
+  },
+  {
+    "id": "t103",
+    "question": "What is the total number of orders placed by customers in Frankfurt?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE customer_id IN (SELECT id FROM customers WHERE city = 'Frankfurt')",
+    "split": "train"
+  },
+  {
+    "id": "t104",
+    "question": "List the names of the top 3 most expensive products in the Electronics category.",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 1 ORDER BY price DESC LIMIT 3",
+    "split": "train"
+  },
+  {
+    "id": "t105",
+    "question": "What is the total revenue generated from all orders placed in April 2024?",
+    "gold_sql": "SELECT SUM(unit_price * quantity) FROM order_items JOIN orders ON order_items.order_id = orders.id WHERE orders.order_date BETWEEN '2024-04-01' AND '2024-04-30'",
+    "split": "train"
+  },
+  {
+    "id": "t106",
+    "question": "What is the name of the top-priced product in the Clothing category?",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 3 ORDER BY price DESC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t107",
+    "question": "How many different customers have placed orders in the year 2025?",
+    "gold_sql": "SELECT COUNT(DISTINCT customer_id) AS unique_customers FROM orders WHERE order_date LIKE '2025%'",
+    "split": "train"
+  },
+  {
+    "id": "t108",
+    "question": "How many products belong to the category named 'Electronics'?",
+    "gold_sql": "SELECT COUNT(*) FROM products WHERE category_id = (SELECT id FROM categories WHERE name = 'Electronics')",
+    "split": "train"
+  },
+  {
+    "id": "t109",
+    "question": "What is the average quantity of order items per order?",
+    "gold_sql": "SELECT AVG(item_count) AS average_quantity FROM (SELECT COUNT(*) AS item_count FROM order_items GROUP BY order_id)",
+    "split": "train"
+  },
+  {
+    "id": "t110",
+    "question": "List the names of the top 3 most expensive products in the database.",
+    "gold_sql": "SELECT name FROM products ORDER BY price DESC LIMIT 3",
+    "split": "train"
+  },
+  {
+    "id": "t111",
+    "question": "What is the total price of the products ordered in all orders with a status of 'shipped'?",
+    "gold_sql": "SELECT SUM(quantity * unit_price) FROM order_items JOIN orders ON order_items.order_id = orders.id WHERE orders.status = 'shipped'",
+    "split": "train"
+  },
+  {
+    "id": "t112",
+    "question": "What is the city of the customer who placed the earliest order?",
+    "gold_sql": "SELECT city FROM customers WHERE id = (SELECT customer_id FROM orders ORDER BY order_date ASC LIMIT 1)",
+    "split": "train"
+  },
+  {
+    "id": "t113",
+    "question": "List the names of the customers who live in Bangalore and signed up in 2023.",
+    "gold_sql": "SELECT name FROM customers WHERE city = 'Bangalore' AND signup_date LIKE '2023%'",
+    "split": "train"
+  },
+  {
+    "id": "t114",
+    "question": "Which category has products with the lowest average price?",
+    "gold_sql": "SELECT name FROM categories WHERE id = (SELECT category_id FROM products GROUP BY category_id ORDER BY AVG(price) ASC LIMIT 1)",
+    "split": "train"
+  },
+  {
+    "id": "t115",
+    "question": "What is the total quantity of order items for order ID 2?",
+    "gold_sql": "SELECT SUM(quantity) FROM order_items WHERE order_id = 2",
+    "split": "train"
+  },
+  {
+    "id": "t116",
+    "question": "Which product has the lowest price?",
+    "gold_sql": "SELECT name FROM products ORDER BY price ASC LIMIT 1",
+    "split": "train"
+  },
+  {
+    "id": "t117",
+    "question": "What is the total number of orders placed by customers in the city of Bangalore?",
+    "gold_sql": "SELECT COUNT(*) AS total_orders FROM orders JOIN customers ON orders.customer_id = customers.id WHERE customers.city = 'Bangalore'",
+    "split": "train"
+  },
+  {
+    "id": "t118",
+    "question": "What is the total revenue generated from order items in order ID 1?",
+    "gold_sql": "SELECT SUM(unit_price * quantity) AS total_revenue FROM order_items WHERE order_id = 1",
+    "split": "train"
+  },
+  {
+    "id": "t119",
+    "question": "How many customers are there in the city of Bangalore?",
+    "gold_sql": "SELECT COUNT(*) FROM customers WHERE city = 'Bangalore'",
+    "split": "train"
+  },
+  {
+    "id": "t120",
+    "question": "List the names of all customers from Denver.",
+    "gold_sql": "SELECT name FROM customers WHERE city = 'Denver'",
+    "split": "train"
+  },
+  {
+    "id": "t121",
+    "question": "List the names of the customers who signed up in the year 2023 and live in Denver.",
+    "gold_sql": "SELECT name FROM customers WHERE signup_date LIKE '2023-%' AND city = 'Denver'",
+    "split": "val"
+  },
+  {
+    "id": "t122",
+    "question": "Which customer has the most recent signup date?",
+    "gold_sql": "SELECT name FROM customers ORDER BY signup_date DESC LIMIT 1",
+    "split": "val"
+  },
+  {
+    "id": "t123",
+    "question": "What is the total revenue generated from the product named 'Mechanical Keyboard'?",
+    "gold_sql": "SELECT SUM(quantity * unit_price) FROM order_items WHERE product_id = (SELECT id FROM products WHERE name = 'Mechanical Keyboard')",
+    "split": "val"
+  },
+  {
+    "id": "t124",
+    "question": "Which products have a price greater than 300 and belong to the Electronics category?",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 1 AND price > 300",
+    "split": "val"
+  },
+  {
+    "id": "t125",
+    "question": "What is the order date of the first order placed by customer ID 2?",
+    "gold_sql": "SELECT order_date FROM orders WHERE customer_id = 2 ORDER BY order_date LIMIT 1",
+    "split": "val"
+  },
+  {
+    "id": "t126",
+    "question": "How many orders have a status of 'pending' and were placed in 2024?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE status = 'pending' AND order_date BETWEEN '2024-01-01' AND '2024-12-31'",
+    "split": "val"
+  },
+  {
+    "id": "t127",
+    "question": "Which category has the most products?",
+    "gold_sql": "SELECT name FROM categories WHERE id = (SELECT category_id FROM products GROUP BY category_id ORDER BY COUNT(*) DESC LIMIT 1)",
+    "split": "val"
+  },
+  {
+    "id": "t128",
+    "question": "List the names of all products in the Electronics category.",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 1",
+    "split": "val"
+  },
+  {
+    "id": "t129",
+    "question": "What are the names of the products in the Electronics category with a price less than 200?",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 1 AND price < 200",
+    "split": "val"
+  },
+  {
+    "id": "t130",
+    "question": "What is the category of the product with ID 1?",
+    "gold_sql": "SELECT name FROM categories WHERE id = (SELECT category_id FROM products WHERE id = 1)",
+    "split": "val"
+  },
+  {
+    "id": "t131",
+    "question": "What is the name of the customer with the ID 2?",
+    "gold_sql": "SELECT name FROM customers WHERE id = 2",
+    "split": "val"
+  },
+  {
+    "id": "t132",
+    "question": "List the names of the top 3 customers with the most orders placed.",
+    "gold_sql": "SELECT c.name FROM customers c JOIN orders o ON c.id = o.customer_id GROUP BY c.id ORDER BY COUNT(o.id) DESC LIMIT 3",
+    "split": "val"
+  },
+  {
+    "id": "t133",
+    "question": "List the names of customers in the city of Denver who signed up in 2023.",
+    "gold_sql": "SELECT name FROM customers WHERE city = 'Denver' AND signup_date BETWEEN '2023-01-01' AND '2023-12-31'",
+    "split": "val"
+  },
+  {
+    "id": "t134",
+    "question": "What is the total number of unique customers that signed up in 2024?",
+    "gold_sql": "SELECT COUNT(DISTINCT id) FROM customers WHERE signup_date LIKE '2024-%'",
+    "split": "val"
+  },
+  {
+    "id": "t135",
+    "question": "What are the names of products that have a price below 50 in the Electronics category?",
+    "gold_sql": "SELECT products.name FROM products JOIN categories ON products.category_id = categories.id WHERE categories.name = 'Electronics' AND products.price < 50",
+    "split": "val"
+  },
+  {
+    "id": "t136",
+    "question": "What is the total quantity of order items for order ID 1?",
+    "gold_sql": "SELECT SUM(quantity) FROM order_items WHERE order_id = 1",
+    "split": "val"
+  },
+  {
+    "id": "t137",
+    "question": "What is the order date of the order placed by customer ID 1?",
+    "gold_sql": "SELECT order_date FROM orders WHERE customer_id = 1",
+    "split": "val"
+  },
+  {
+    "id": "t138",
+    "question": "How many orders have a status of 'shipped'?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE status = 'shipped'",
+    "split": "val"
+  },
+  {
+    "id": "t139",
+    "question": "List the names of all categories that have products priced over 100.",
+    "gold_sql": "SELECT DISTINCT c.name FROM categories c JOIN products p ON c.id = p.category_id WHERE p.price > 100",
+    "split": "val"
+  },
+  {
+    "id": "t140",
+    "question": "What is the status of order ID 3?",
+    "gold_sql": "SELECT status FROM orders WHERE id = 3",
+    "split": "val"
+  },
+  {
+    "id": "t141",
+    "question": "What is the order date of the most recent order?",
+    "gold_sql": "SELECT order_date FROM orders ORDER BY order_date DESC LIMIT 1",
+    "split": "val"
+  },
+  {
+    "id": "t142",
+    "question": "What is the price of the product with ID 3?",
+    "gold_sql": "SELECT price FROM products WHERE id = 3",
+    "split": "val"
+  },
+  {
+    "id": "t143",
+    "question": "List the names of the top 2 most expensive products in the Electronics category.",
+    "gold_sql": "SELECT name FROM products WHERE category_id = 1 ORDER BY price DESC LIMIT 2",
+    "split": "val"
+  },
+  {
+    "id": "t144",
+    "question": "Which city has customers that signed up before July 2023?",
+    "gold_sql": "SELECT DISTINCT city FROM customers WHERE signup_date < '2023-07-01'",
+    "split": "val"
+  },
+  {
+    "id": "t145",
+    "question": "What is the most expensive product in the database?",
+    "gold_sql": "SELECT name FROM products ORDER BY price DESC LIMIT 1",
+    "split": "val"
+  },
+  {
+    "id": "t146",
+    "question": "How many orders were placed with the status 'cancelled'?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE status = 'cancelled'",
+    "split": "val"
+  },
+  {
+    "id": "t147",
+    "question": "What is the city of the customer named Mei Ivanov?",
+    "gold_sql": "SELECT city FROM customers WHERE name = 'Mei Ivanov'",
+    "split": "val"
+  },
+  {
+    "id": "t148",
+    "question": "What is the total number of unique products in the database?",
+    "gold_sql": "SELECT COUNT(DISTINCT id) AS unique_products FROM products",
+    "split": "val"
+  },
+  {
+    "id": "t149",
+    "question": "How many orders were placed by the customer with ID 1?",
+    "gold_sql": "SELECT COUNT(*) FROM orders WHERE customer_id = 1",
+    "split": "val"
+  },
+  {
+    "id": "t150",
+    "question": "What is the name of the product in the Clothing category with the lowest price?",
+    "gold_sql": "SELECT name FROM products WHERE category_id = (SELECT id FROM categories WHERE name = 'Clothing') ORDER BY price LIMIT 1",
+    "split": "val"
+  }
+]
